@@ -1,5 +1,4 @@
-const { User, Thought, Reaction } = require('../models');
-
+const { User, Thought } = require('../models');
 
 module.exports = {
     // Get all users
@@ -48,8 +47,8 @@ module.exports = {
     addFriend(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $addToSet: { friends: req.body.username } })
-            .then( (user) => {
+            { $addToSet: { friends: { username: req.body.username } } })
+            .then((user) => {
                 !user
                     ? res.status(404).json({ message: 'User not found!' })
                     : res.json(`${req.body.username} added as ${req.params.username}'s friend`)
@@ -60,8 +59,8 @@ module.exports = {
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $pull: { friends: req.body.username } })
-            .then( (user) => {
+            { $pull: { friends: { username: req.body.username } } })
+            .then((user) => {
                 !user
                     ? res.status(404).json({ message: 'User not found!' })
                     : res.json(`${req.body.username} removed as ${req.params.username}'s friend`)
