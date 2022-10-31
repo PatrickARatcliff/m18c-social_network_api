@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 // Schema to create a thought model
 const thoughtSchema = new Schema(
@@ -7,11 +8,11 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
       minLength: [1, 'Thoughts must be 1-280 characters.'],
-      maxLength: [280, 'Thoughts must be 1-280 characters.']
+      maxLength: [280, 'Thoughts must be 1-280 characters.'],
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: () => new Date.createdAt(),
     },
     username: [
       {
@@ -26,7 +27,7 @@ const thoughtSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
-    id: false,
+    id: true,
   }
 );
 

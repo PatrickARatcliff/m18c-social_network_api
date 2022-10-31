@@ -47,7 +47,7 @@ connection.once('open', async () => {
             email: 'testing7@gmail.com'
         },
         {
-            username: 'Kellen',
+            username: 'Susanne',
             email: 'testing8@gmail.com'
         },
         {

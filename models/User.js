@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { validateEmail } = require('../utils/validEmail')
 const thoughtSchema = require('./Thought');
-const reactionSchema = require('./Reaction');
 
 // Schema to create User model
 const userSchema = new Schema(
