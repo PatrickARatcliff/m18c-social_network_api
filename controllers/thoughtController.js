@@ -52,7 +52,7 @@ module.exports = {
             .then(() => res.json({ message: 'Thought deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
-    // add a reaction to a thought using thoughtId and reactionId
+    // add a reaction to a thought using thoughtId
     addReaction(req, res) {
         Reaction.create(req.body)
             .then(async (reaction) => {
