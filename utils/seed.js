@@ -1,6 +1,5 @@
 const connection = require('../config/connection');
-
-const { Reaction, Thought, User } = require('../models');
+const { Thought, User } = require('../models');
 
 connection.on('error', (err) => err);
 
@@ -11,7 +10,7 @@ connection.once('open', async () => {
     await Thought.deleteMany({});
 
     // Drop existing reactions
-    await Reaction.deleteMany({});
+    // await Reaction.deleteMany({});
 
     // Drop existing users
     await User.deleteMany({});
@@ -20,43 +19,63 @@ connection.once('open', async () => {
     const users = [
         {
             username: 'Zell',
-            email: 'testing1@gmail.com'
+            email: 'testing1@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Vincy',
-            email: 'testing2@gmail.com'
+            email: 'testing2@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Shion',
-            email: 'testing3@gmail.com'
+            email: 'testing3@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'George',
-            email: 'testing4@gmail.com'
+            email: 'testing4@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Mitch',
-            email: 'testing5@gmail.com'
+            email: 'testing5@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Toby',
-            email: 'testing6@gmail.com'
+            email: 'testing6@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Bob',
-            email: 'testing7@gmail.com'
+            email: 'testing7@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Susanne',
-            email: 'testing8@gmail.com'
+            email: 'testing8@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Patrick',
-            email: 'testing9@gmail.com'
+            email: 'testing9@gmail.com',
+            thoughts: [],
+            friends: []
         },
         {
             username: 'Mariano',
-            email: 'testing10@gmail.com'
+            email: 'testing10@gmail.com',
+            thoughts: [],
+            friends: []
         }
     ];
 

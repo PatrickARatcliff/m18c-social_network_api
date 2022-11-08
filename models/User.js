@@ -7,6 +7,8 @@ const userSchema = new Schema(
     {
         username: {
             type: String,
+            min: 3,
+            max: 20,
             unique: true,
             required: true,
             trim: true,
@@ -18,8 +20,14 @@ const userSchema = new Schema(
             validate: [validateEmail, 'Please provide a valid email address'],
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email address']
         },
-        thoughts: [thoughtSchema],
-        friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+        thoughts: [{
+            type: Schema.Types.ObjectId,
+            ref: 'thought'
+        }],
+        friends: [{ 
+            type: Schema.Types.ObjectId, 
+            ref: 'user' ,
+        }],
     },
     {
         toJSON: {
@@ -27,15 +35,26 @@ const userSchema = new Schema(
             virtuals: true,
         },
         id: false,
-    }
+    },
+    {timestamps: true},    
 );
 
-// Create a virtual property `friendCount` that gets the amount of friends per user
+// create virtual 'friends' property for friends field
+userSchema.virtual('userFriends',{
+    ref: 'user',
+    localField: '_id',
+    foreignField: 'friends',
+    justOne: false,
+},
+{toJSON: {virtuals: true} }
+)
+
+// create a virtual property `friendCount` that gets the amount of friends per user
 userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-// Initialize our User model
+// initialize our User model
 const User = model('user', userSchema);
 
 module.exports = User;

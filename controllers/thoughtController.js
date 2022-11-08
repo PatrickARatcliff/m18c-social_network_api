@@ -19,9 +19,9 @@ module.exports = {
     createThought(req, res) {
         Thought.create(req.body)
             .then(async (thought) => {
-                await User.findOneAndUpdate(
-                    { userName: thought.userName },
-                    { $addToSet: { thoughts: thought._id } },
+                return User.findOneAndUpdate(
+                    { username: req.body.username },
+                    { $push: { thoughts: thought._id } },
                     { new: true },
                 );
             })

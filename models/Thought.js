@@ -12,12 +12,12 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: () => new Date.createdAt(),
+      default: () => new Date(),
     },
     username: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
+        type: String,
+        // ref: 'user',
         required: true,
       },
     ],
@@ -27,12 +27,12 @@ const thoughtSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
-    id: true,
+    id: false,
   }
 );
 
 // Create a virtual property `thoughtCount` that gets the amount of friends per user
-userSchema.virtual('reactionCount').get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
