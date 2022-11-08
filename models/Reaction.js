@@ -15,14 +15,14 @@ const reactionSchema = new Schema(
         },
         username: [
             {
-                type: Schema.Types.ObjectId,
-                ref: 'user',
+                type: String,
+                // ref: 'user',
                 required: true,
             },
         ],
         createdAt: {
             type: Date,
-            default: () => new Date.createdAt(),
+            default: () => new Date(),
         },
     },
     {

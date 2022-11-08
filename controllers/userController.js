@@ -47,7 +47,7 @@ module.exports = {
     addFriend(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $addToSet: { friends: { username: req.body.username } } })
+            { $push: { friends: req.body.username } })
             .then((user) => {
                 !user
                     ? res.status(404).json({ message: 'User not found!' })
@@ -59,12 +59,12 @@ module.exports = {
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $pull: { friends: { username: req.body.username } } })
-            .then((user) => {
+            { $pull: { friends: { username: req.body.username } }}
+            ).then((user) => {
                 !user
                     ? res.status(404).json({ message: 'User not found!' })
-                    : res.json(`${req.body.username} removed as ${req.params.username}'s friend`)
-            })
-            .catch((err) => res.status(500).json(err));
+                    : res.json(`${req.body.username} removed as ${req.params.username}'s friend`);
+            }
+            ).catch((err) => res.status(500).json(err));
     },
 };
