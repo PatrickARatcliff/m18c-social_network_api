@@ -37,7 +37,9 @@ module.exports = {
     updateThought(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $set: { thoughtText: req.body.thoughtText} },)
+            { $set: { thoughtText: req.body.thoughtText} },
+            { returnOriginal: false },
+            )
             .then((thought) => {
                 !thought ? res.status(404).json({ message: 'Thought not found!' }) : res.json(thought)
             })

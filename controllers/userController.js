@@ -28,7 +28,8 @@ module.exports = {
     updateUser(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $set: { username: req.body.username, email: req.body.email } },)
+            { $set: { username: req.body.username, email: req.body.email } },
+            { returnOriginal: false })
             .then((user) => {
                 !user ? res.status(404).json({ message: 'User not found!' }) : res.json(user)
             })
@@ -59,7 +60,7 @@ module.exports = {
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { username: req.params.username },
-            { $pull: { friends: { username: req.body.username } }}
+            { $pullAll: { friends: [req.body.username] }}
             ).then((user) => {
                 !user
                     ? res.status(404).json({ message: 'User not found!' })
